@@ -1,0 +1,2429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns="http://schemas.microsoft.com/office/project/server/webservices/Project/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s4="http://schemas.microsoft.com/office/project/server/webservices/ProjectContextDataSet/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s8="http://schemas.microsoft.com/office/project/server/webservices/ProjectRelationsDataSet/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s5="http://schemas.microsoft.com/office/project/server/webservices/ProjectImpactDataSet/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s6="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" xmlns:s2="http://schemas.microsoft.com/office/project/server/webservices/SyncDataSet" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s7="http://schemas.microsoft.com/office/project/server/webservices/SyncErrorsDataSet" xmlns:s3="http://schemas.microsoft.com/office/project/server/webservices/TeamBuilderDataSet/" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/Project/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Contains the Project web service for Microsoft Project Server.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/Project/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:import namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+      <s:import namespace="http://schemas.microsoft.com/office/project/server/webservices/TeamBuilderDataSet/" />
+      <s:import namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectContextDataSet/" />
+      <s:import namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectRelationsDataSet/" />
+      <s:import namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectImpactDataSet/" />
+      <s:import namespace="http://schemas.microsoft.com/office/project/server/webservices/SyncDataSet" />
+      <s:import namespace="http://schemas.microsoft.com/office/project/server/webservices/SyncErrorsDataSet" />
+      <s:element name="CheckOutProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionDescription" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckOutProjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueueCheckInProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="force" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionDescription" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueCheckInProjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueueCreateProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataset">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="validateOnly" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueCreateProjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueueCreateProjectAndCheckOut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataset">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="validateOnly" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueCreateProjectAndCheckOutResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueueAddToProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataset">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="validateOnly" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueAddToProjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateProjectFromTemplate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="templateUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateProjectFromTemplateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateProjectFromTemplateResult" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueDeleteProjects">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="deleteWSS" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectUids" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="1" maxOccurs="1" name="deleteBoth" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGuid">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="guid" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QueueDeleteProjectsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueueRenameProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueRenameProjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="dataStore" type="tns:DataStoreEnum" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="DataStoreEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="WorkingStore" />
+          <s:enumeration value="PublishedStore" />
+          <s:enumeration value="VersionsStore" />
+          <s:enumeration value="ReportingStore" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ReadProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectEntities">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProjectEntityType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="dataStore" type="tns:DataStoreEnum" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectEntitiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectEntitiesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueUpdateProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataset">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="validateOnly" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueUpdateProjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueueDeleteFromProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectEntityUids" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueDeleteFromProjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadProjectTeam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectTeamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectTeamResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/TeamBuilderDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueUpdateProjectTeam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="JobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataset">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/TeamBuilderDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueUpdateProjectTeamResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadSchedulingContext">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="projectUids" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="0" maxOccurs="1" name="resourceUids" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadSchedulingContextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadSchedulingContextResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectContextDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectNameFromProjectUid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="dataStore" type="tns:DataStoreEnum" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectNameFromProjectUidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectNameFromProjectUidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadServerListSeparator">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadServerListSeparatorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReadServerListSeparatorResult" type="s1:char" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projGuid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="dataStore" type="tns:DataStoreEnum" />
+            <s:element minOccurs="0" maxOccurs="1" name="projName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="projType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectStatusResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueuePublish">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="fullPublish" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="WssURL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueuePublishResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueuePublishResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectRelationsDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueuePublishSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueuePublishSummaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueuePublishSummaryResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectRelationsDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueUpgradeProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueUpgradeProjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueueCreateProposalProjectAndCheckout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projDS">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="validateOnly" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="publishProject" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueCreateProposalProjectAndCheckoutResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateOperationsWorkFromWssList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="listDataXml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="priorityMappingsXml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="titleFieldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startDateFieldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="finishDateFieldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskPriorityFieldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="percentCompleteFieldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="resourceFieldName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeWorkflow" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateOperationsWorkFromWssListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateOperationsWorkFromWssListResult" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProjectWorkspaceAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="newWebName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="newWSSServerUID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProjectWorkspaceAddressResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadProjectList">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadProjectListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectListByDepartment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="departmentUid" nillable="true" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectListByDepartmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectListByDepartmentResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueSynchronizeProjectWorkspace">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="forceFullSync" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueSynchronizeProjectWorkspaceResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadProjectImpacts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="store" type="tns:DataStoreEnum" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectImpactsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectImpactsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectImpactDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueUpdateProjectImpacts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="jobUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="sessionUid" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectImpactDataSet">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectImpactDataSet/" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueueUpdateProjectImpactsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateWssListSyncedProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="syncDataSet">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/SyncDataSet" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="projectName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateWssListSyncedProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateWssListSyncedProjectResult" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncProjectWithWss">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="syncEntityUid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="syncEntityUidType" type="tns:SyncEntityUidType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="SyncEntityUidType">
+        <s:restriction base="s:string">
+          <s:enumeration value="ProjectUid" />
+          <s:enumeration value="WssListUid" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SyncProjectWithWssResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadProjectSyncSettings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="syncEntityUids" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="1" maxOccurs="1" name="syncEntityUidType" type="tns:SyncEntityUidType" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeMappingData" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectSyncSettingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectSyncSettingsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/SyncDataSet" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProjectSyncSettings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="syncDataSet">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/SyncDataSet" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProjectSyncSettingsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadProjectSyncErrorInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="wssListUid" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadProjectSyncErrorInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadProjectSyncErrorInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://schemas.microsoft.com/office/project/server/webservices/SyncErrorsDataSet" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="char">
+        <s:restriction base="s:unsignedShort" />
+      </s:simpleType>
+    </s:schema>
+    <xs:schema xmlns:mstns="http://schemas.microsoft.com/office/project/server/webservices/SyncDataSet" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" xmlns="http://schemas.microsoft.com/office/project/server/webservices/SyncDataSet" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/SyncDataSet" id="SyncDataSet" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="SyncDataSet">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="SyncProjectSettings">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="SYNC_WSS_LIST_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="SYNC_WSS_SERVER_URL">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="2000" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="SYNC_LAST_SYNC_DATE" type="xs:dateTime" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="SyncFieldMappings">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="SYNC_WSS_LIST_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="SYNC_WSS_FIELD_UID" type="xs:string" />
+                  <xs:element name="SYNC_WSS_FIELD_NAME">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="255" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="SYNC_PROJECT_FIELD_UID" msprop:Generator_ColumnPropNameInTable="SYNC_PROJECT_FIELD_UID" name="SYNC_PROJECT_FIELD_UID" type="xs:string" />
+                  <xs:element name="SYNC_PROJECT_FIELD_NAME">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="255" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SYNC_IS_PROJECT_CUSTOM_FIELD" type="xs:boolean" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="SyncItemTaskMappings">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="SYNC_WSS_LIST_UID" type="xs:string" />
+                  <xs:element name="SYNC_WSS_LIST_ITEM_ID" type="xs:int" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="SYNC_TASK_UID" type="xs:string" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="SyncValueTranslations">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="SYNC_WSS_LIST_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="SYNC_WSS_FIELD_UID" type="xs:string" />
+                  <xs:element name="SYNC_WSS_FIELD_NAME">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="255" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SYNC_WSS_VALUE">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="255" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SYNC_PROJECT_VALUE">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="255" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique msdata:PrimaryKey="true" name="Constraint1">
+          <xs:selector xpath=".//mstns:SyncProjectSettings" />
+          <xs:field xpath="mstns:SYNC_WSS_LIST_UID" />
+        </xs:unique>
+        <xs:unique msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true" name="SyncFieldMappings_Constraint1">
+          <xs:selector xpath=".//mstns:SyncFieldMappings" />
+          <xs:field xpath="mstns:SYNC_WSS_LIST_UID" />
+          <xs:field xpath="mstns:SYNC_PROJECT_FIELD_UID" />
+        </xs:unique>
+        <xs:unique msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true" name="SyncItemTaskMappings_Constraint1">
+          <xs:selector xpath=".//mstns:SyncItemTaskMappings" />
+          <xs:field xpath="mstns:SYNC_WSS_LIST_UID" />
+          <xs:field xpath="mstns:SYNC_WSS_LIST_ITEM_ID" />
+        </xs:unique>
+        <xs:unique msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true" name="SyncValueTranslations_Constraint1">
+          <xs:selector xpath=".//mstns:SyncValueTranslations" />
+          <xs:field xpath="mstns:SYNC_WSS_LIST_UID" />
+          <xs:field xpath="mstns:SYNC_WSS_FIELD_UID" />
+          <xs:field xpath="mstns:SYNC_WSS_VALUE" />
+        </xs:unique>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:mstns="http://schemas.microsoft.com/office/project/server/webservices/TeamBuilderDataSet/" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="http://schemas.microsoft.com/office/project/server/webservices/TeamBuilderDataSet/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/TeamBuilderDataSet/" id="ProjectTeamDataSet" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="ProjectTeamDataSet">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="ProjectTeam">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="RES_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="NEW_RES_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_NAME" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_BOOKING_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="RES_HAS_ACTUALS" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_TYPE" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_IS_ENTERPRISE_RESOURCE" type="xs:boolean" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique msdata:PrimaryKey="true" name="ProjectTeamKey">
+          <xs:selector xpath=".//mstns:ProjectTeam" />
+          <xs:field xpath="mstns:RES_UID" />
+          <xs:field xpath="mstns:PROJ_UID" />
+        </xs:unique>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:mstns="http://schemas.microsoft.com/office/project/server/webservices/ProjectContextDataSet/" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="http://schemas.microsoft.com/office/project/server/webservices/ProjectContextDataSet/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectContextDataSet/" id="ProjectContextDataSet" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="ProjectContextDataSet">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Relationships">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" name="RelatedTo_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" name="RelatedTo_NAME" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" name="Relationship" type="xs:unsignedByte" />
+                  <xs:element msdata:ReadOnly="true" name="HasBuildTeamPermission" type="xs:boolean" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:mstns="http://schemas.microsoft.com/office/project/server/webservices/ProjectImpactDataSet/" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="http://schemas.microsoft.com/office/project/server/webservices/ProjectImpactDataSet/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectImpactDataSet/" id="ProjectImpactDataSet" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="ProjectImpactDataSet">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="ProjectImpactValues">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="DRIVER_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="LT_STRUCT_UID" type="xs:string" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ImpactStatements">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" name="DRIVER_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" name="PROJECT_IMPACT_CF_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" name="LT_STRUCT_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" name="DESCRIPTION">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="1000" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Drivers">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" name="DRIVER_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" name="DRIVER_NAME">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="255" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="DRIVER_DESCRIPTION">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="1000" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="LookupTableValues">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" name="LT_STRUCT_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="LT_VALUE_TEXT">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="255" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique msdata:PrimaryKey="true" name="Constraint1">
+          <xs:selector xpath=".//mstns:ProjectImpactValues" />
+          <xs:field xpath="mstns:PROJ_UID" />
+          <xs:field xpath="mstns:DRIVER_UID" />
+        </xs:unique>
+        <xs:unique msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true" name="ImpactStatements_Constraint1">
+          <xs:selector xpath=".//mstns:ImpactStatements" />
+          <xs:field xpath="mstns:DRIVER_UID" />
+          <xs:field xpath="mstns:PROJECT_IMPACT_CF_UID" />
+          <xs:field xpath="mstns:LT_STRUCT_UID" />
+        </xs:unique>
+        <xs:unique msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true" name="Drivers_Constraint1">
+          <xs:selector xpath=".//mstns:Drivers" />
+          <xs:field xpath="mstns:DRIVER_UID" />
+        </xs:unique>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:mstns="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectDataSet/" id="ProjectDataSet" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="ProjectDataSet">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Project">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_NAME" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_PROP_AUTHOR" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="CAL_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="CAL_NAME" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_PROP_CATEGORY" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_PROP_COMPANY" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_PROP_KEYWORDS" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_PROP_MANAGER" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_PROP_SUBJECT" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_PROP_TITLE" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CALC_ACT_COSTS" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CRITICAL_SLACK_LIMIT" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_DIGITS" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_POSITION" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_SYMBOL" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_CODE" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_NEW_TASKS_ARE_EFFORT_DRIVEN" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_INFO_CURRENT_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_OPT_DEF_FINISH_TIME" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_DEF_FIX_COST_ACCRUAL" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_DEF_OVT_RATE" type="xs:double" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_DEF_STD_RATE" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_OPT_DEF_START_TIME" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_DEF_TASK_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="WPROJ_TRACKING_METHOD" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_DUR_ENTRY_FMT" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_INFO_FINISH_DATE" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_HONOR_CONSTRAINTS" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_MULT_CRITICAL_PATHS" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_INFO_SCHED_FROM" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_SPLIT_IN_PROGRESS" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_SPREAD_ACT_COSTS" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_SPREAD_PCT_COMP" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_INFO_START_DATE" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="PROJ_INFO_STATUS_DATE" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_TASK_UPDATES_RES" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_WORK_ENTRY_FMT" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_NEW_TASK_EST" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_PROTECTED_ACTUALS_SYNCH" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ProjectOptionDefaultOvertimeRateFormat" type="xs:short" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ProjectOptionDefaultStandardRateFormat" type="xs:short" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_FY_START_MONTH" type="xs:short" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_FY_USE_START_YR" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_MINUTES_PER_DAY" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_MINUTES_PER_WEEK" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_DAYS_PER_MONTH" type="xs:short" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_MOVE_ACTUAL_IF_LATER" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_MOVE_ACTUAL_TO_STATUS" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_MOVE_REMAINING_IF_EARLIER" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_MOVE_REMAINING_TO_STATUS" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_SHOW_EST_DUR" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_WEEK_START_DAY" type="xs:short" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="WPROJ_ISSUE_LIST_NAME" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="WPROJ_RISK_LIST_NAME" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="WPROJ_STS_SUBWEB_NAME" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="WSTS_SERVER_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="ProjectOwnerID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="PROJ_CHECKOUTBY" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_CHECKOUTDATE" type="xs:dateTime" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="PROJ_SESSION_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_SESSION_DESCRIPTION" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_STALE_FLAGS" type="xs:int" />
+                  <xs:element minOccurs="0" name="WPROJ_DESCRIPTION" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="WPROJ_LAST_PUB" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_LAST_SAVED" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="CREATED_DATE" type="xs:dateTime" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="ENTERPRISE_PROJECT_TYPE_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ENTERPRISE_PROJECT_TYPE_NAME" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="WORKFLOW_INSTANCE_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="PHASE_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PHASE_NAME" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="STAGE_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="STAGE_NAME" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="SKIP_TO_STAGE_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="OPTIMIZER_SOLUTION_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="PLANNER_SOLUTION_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="OPTIMIZER_DECISION" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PLANNER_DECISION" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PLANNER_START_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PLANNER_END_DATE" type="xs:dateTime" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="OPTIMIZER_FORCE_ALIAS_LT_VALUE_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="PLANNER_FORCE_ALIAS_LT_VALUE_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_NEW_TASKS_ARE_MANUAL" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_WINPROJ_VERSION_NUMBER" type="xs:decimal" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Task">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="TASK_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="TASK_PARENT_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="TASK_NAME" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_ID" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_IS_MILESTONE" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_SUMMARY" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_IS_MARKED" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IGNORES_RES_CAL" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_IS_EFFORT_DRIVEN" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_CRITICAL" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_EXTERNAL" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_FROM_FINISH_SUBPROJ" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_OVERALLOCATED" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_RECURRING" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_RECURRING_SUMMARY" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_SUBPROJ" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_READONLY_SUBPROJ" type="xs:boolean" />
+                  <xs:element default="false" name="TASK_LOCKDOWN_BY_MANAGER" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_LEVELING_DELAY" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_LEVELING_DELAY_FMT" type="xs:short" />
+                  <xs:element minOccurs="0" name="TASK_LEVELING_CAN_SPLIT" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_LEVELING_ADJUSTS_ASSN" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_DUR_IS_EST" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_DUR" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_DUR_FMT" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_DUR_VAR" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_EAC" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_VAC" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_ACT_DUR" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_REM_DUR" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_CONSTRAINT_TYPE" type="xs:short" />
+                  <xs:element minOccurs="0" name="TASK_CONSTRAINT_DATE" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="TASK_ACT_START" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="TASK_ACT_FINISH" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="TASK_PRIORITY" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_PCT_COMP" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_PCT_WORK_COMP" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_FIXED_COST_ACCRUAL" type="xs:short" />
+                  <xs:element minOccurs="0" name="TASK_DEADLINE" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="TASK_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_OVT_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_REG_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="TASK_ACT_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_ACT_OVT_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="TASK_REM_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_REM_OVT_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="TASK_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_OVT_COST" type="xs:double" />
+                  <xs:element minOccurs="0" name="TASK_FIXED_COST" type="xs:double" />
+                  <xs:element minOccurs="0" name="TASK_ACT_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_ACT_OVT_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_REM_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_REM_OVT_COST" type="xs:double" />
+                  <xs:element minOccurs="0" name="TASK_PHY_PCT_COMP" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_EVMETHOD" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_OUTLINE_LEVEL" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_OUTLINE_NUM" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="TASK_CAL_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="TASK_START_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_START_VAR" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_FINISH_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_FINISH_VAR" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_RESUME_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_STOP_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_PRELEVELED_START" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_PRELEVELED_FINISH" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_EARLY_START" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_EARLY_FINISH" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_LATE_START" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_LATE_FINISH" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TB_START" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TB_FINISH" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TB_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TB_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TB_DUR" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TB_DUR_FMT" type="xs:short" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_BCWS" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_BCWP" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_ACWP" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_FREE_SLACK" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_TOTAL_SLACK" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_HAS_LINKED_FIELDS" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_WBS" type="xs:string" />
+                  <xs:element minOccurs="0" name="AddPosition" type="xs:int" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="AddAfterTaskUID" type="xs:string" />
+                  <xs:element minOccurs="0" name="DurationType" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="WOBJ_DOC_REF_CNT" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="WOBJ_ISSUE_REF_CNT" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="WOBJ_RISK_REF_CNT" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="WOBJ_OTHER_REF_CNT" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="CREATED_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="MOD_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_NAME" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_TYPE" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_OPT_CURRENCY_DIGITS" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_OPT_CURRENCY_POSITION" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_OPT_CURRENCY_SYMBOL" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="TASK_EXT_PROJ_UID" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_BUDGET_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_NULL" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_BUDGET_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_CONTACT" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_COST_VAR" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_CPI" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_CV" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TaskCVP" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_START_SLACK" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_FINISH_SLACK" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_HYPERLINK_FRIENDLY_NAME" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_HYPERLINK_ADDRESS" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_HYPERLINK_SUB_ADDRESS" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_IS_ROLLED_UP" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_NOTES" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_SPI" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_SV" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TaskSVP" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_TCPI" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_WORK_VAR" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_COMPLETE_THROUGH" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="TASK_IS_MANUAL" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_IS_ACTIVE" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TASK_IS_DISPSUMMARY" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_SCHED_START" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_SCHED_FINISH" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="TASK_START_TXT" type="xs:string" />
+                  <xs:element minOccurs="0" name="TASK_FINISH_TXT" type="xs:string" />
+                  <xs:element minOccurs="0" name="TASK_SCHED_DUR" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_SCHED_DUR_FMT" type="xs:int" />
+                  <xs:element minOccurs="0" name="TASK_DUR_TXT" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="StatusManager" type="xs:string" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ProjectResource">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="RES_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="RES_AD_GUID" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_NAME" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_ID" type="xs:int" />
+                  <xs:element minOccurs="0" name="RES_INITIALS" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_PHONETICS" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_CODE" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_GROUP" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_HYPERLINK_ADDRESS" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_HYPERLINK_FRIENDLY_NAME" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_HYPERLINK_SUB_ADDRESS" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="RES_BOOKING_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="RES_MATERIAL_LABEL" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_STD_RATE" type="xs:double" />
+                  <xs:element minOccurs="0" name="RES_STD_RATE_FMT" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_PEAK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_OVT_COST" type="xs:double" />
+                  <xs:element minOccurs="0" name="RES_OVT_RATE" type="xs:double" />
+                  <xs:element minOccurs="0" name="RES_OVT_RATE_FMT" type="xs:int" />
+                  <xs:element minOccurs="0" name="RES_COST_PER_USE" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_ACT_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_ACT_OVT_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_REM_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_REM_OVT_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_ACT_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_ACT_OVT_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_OVT_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_REM_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_REM_OVT_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_REG_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="RES_ACCRUE_AT" type="xs:short" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_AVAIL_FROM" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_AVAIL_TO" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="RES_MAX_UNITS" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_HAS_NOTES" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="WRES_ACCOUNT" type="xs:string" />
+                  <xs:element minOccurs="0" name="WRES_EMAIL" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_ASSN_START" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_ASSN_FINISH" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_ACWP" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_BCWP" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_BCWS" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_PCT_WORK_COMPLETE" type="xs:int" />
+                  <xs:element minOccurs="0" name="RES_CAN_LEVEL" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_HAS_LINKED_FIELDS" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_IS_OVERALLOCATED" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_IS_ENTERPRISE_RESOURCE" type="xs:boolean" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="RES_DEF_ASSN_OWNER" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ResourceIsBudget" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_BUDGET_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_BUDGET_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="RES_COST_CENTER" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_NAME" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_DIGITS" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_POSITION" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_SYMBOL" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_NOTES" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_COST_VAR" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_CV" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ResourceIsGeneric" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_SV" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_VAC" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_WORK_VAR" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RB_BASE_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RB_BASE_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="MOD_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="CREATED_DATE" type="xs:dateTime" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Assignment">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="TASK_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="ASSN_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="RES_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" minOccurs="0" name="ASSN_PARENT_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="ASSN_ACT_START" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="ASSN_ACT_FINISH" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_WORK_CONTOUR" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_DELAY" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_LEVELING_DELAY" type="xs:int" />
+                  <xs:element minOccurs="0" name="ASSN_COST_RATE_TABLE" type="xs:int" />
+                  <xs:element minOccurs="0" name="ASSN_UNITS" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_ACT_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_REG_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_OVT_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_REM_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_ACT_OVT_WORK" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_REM_OVT_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_START_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_FINISH_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="AB_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="AB_START" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="AB_FINISH" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="AB_COST_PER_USE" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="AB_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_RESUME_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_STOP_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_ENTSUMPROJID" type="xs:int" />
+                  <xs:element minOccurs="0" name="ASSN_COST" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_ACT_COST" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_ACT_OVT_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_REM_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_REM_OVT_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_OVT_COST" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="TASK_NAME" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="RES_NAME" type="xs:string" />
+                  <xs:element minOccurs="0" name="ASSN_PCT_WORK_COMPLETE" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_ACWP" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_BCWP" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_BCWS" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_BOOKING_TYPE" type="xs:short" />
+                  <xs:element minOccurs="0" name="ASSN_DEMAND_REQ" type="xs:unsignedByte" />
+                  <xs:element minOccurs="0" name="ASSN_MATERIAL_RATE_FMT" type="xs:short" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_DELAY_FMT" type="xs:short" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_START_VAR" type="xs:int" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_FINISH_VAR" type="xs:int" />
+                  <xs:element minOccurs="0" name="ASSN_HAS_LINKED_FIELDS" type="xs:boolean" />
+                  <xs:element default="false" name="WASSN_LOCKDOWN_BY_MANAGER" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_IS_CONFIRMED" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_IS_PUBLISHED" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_IS_OVERALLOCATED" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="ASSN_RES_TYPE" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_RESPONSE_PENDING" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_UPDATE_NEEDED" type="xs:boolean" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="RES_UID_OWNER" type="xs:string" />
+                  <xs:element minOccurs="0" name="ASSN_BUDGET_COST" type="xs:double" />
+                  <xs:element minOccurs="0" name="ASSN_BUDGET_WORK" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="PROJ_NAME" type="xs:string" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_DIGITS" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_POSITION" type="xs:int" />
+                  <xs:element minOccurs="0" name="PROJ_OPT_CURRENCY_SYMBOL" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_COST_VAR" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_CV" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_HYPERLINK_FRIENDLY_NAME" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_HYPERLINK_ADDRESS" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="AssignmentHyperlinkHref" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_NOTES" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_SV" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_VAC" type="xs:double" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ASSN_WORK_VAR" type="xs:double" />
+                  <xs:element minOccurs="0" name="RES_MATERIAL_LABEL" type="xs:string" />
+                  <xs:element minOccurs="0" name="RES_BOOKING_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="RES_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="RES_GROUP" type="xs:string" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="ResourceIsGeneric" type="xs:boolean" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="MOD_DATE" type="xs:dateTime" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="CREATED_DATE" type="xs:dateTime" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Dependency">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="LINK_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="LINK_PRED_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="LINK_SUCC_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="LINK_TYPE" type="xs:int" />
+                  <xs:element minOccurs="0" name="LINK_LAG" type="xs:int" />
+                  <xs:element minOccurs="0" name="LINK_LAG_FMT" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ProjectCustomFields">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="CUSTOM_FIELD_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="MD_PROP_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="MD_PROP_ID" type="xs:int" />
+                  <xs:element minOccurs="0" name="FIELD_TYPE_ENUM" type="xs:unsignedByte" />
+                  <xs:element minOccurs="0" name="FLAG_VALUE" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TEXT_VALUE" type="xs:string" />
+                  <xs:element minOccurs="0" name="DATE_VALUE" type="xs:dateTime" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="CODE_VALUE" type="xs:string" />
+                  <xs:element minOccurs="0" name="DUR_VALUE" type="xs:int" />
+                  <xs:element minOccurs="0" name="NUM_VALUE" type="xs:decimal" />
+                  <xs:element minOccurs="0" name="DUR_FMT" type="xs:unsignedByte" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="INDICATOR_VALUE" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="TaskCustomFields">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="CUSTOM_FIELD_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="TASK_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="MD_PROP_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="MD_PROP_ID" type="xs:int" />
+                  <xs:element minOccurs="0" name="FIELD_TYPE_ENUM" type="xs:unsignedByte" />
+                  <xs:element minOccurs="0" name="FLAG_VALUE" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TEXT_VALUE" type="xs:string" />
+                  <xs:element minOccurs="0" name="DATE_VALUE" type="xs:dateTime" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="CODE_VALUE" type="xs:string" />
+                  <xs:element minOccurs="0" name="DUR_VALUE" type="xs:int" />
+                  <xs:element minOccurs="0" name="NUM_VALUE" type="xs:decimal" />
+                  <xs:element minOccurs="0" name="DUR_FMT" type="xs:unsignedByte" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="INDICATOR_VALUE" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ProjectResourceCustomFields">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="CUSTOM_FIELD_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="RES_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="MD_PROP_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="MD_PROP_ID" type="xs:int" />
+                  <xs:element minOccurs="0" name="FIELD_TYPE_ENUM" type="xs:unsignedByte" />
+                  <xs:element minOccurs="0" name="FLAG_VALUE" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TEXT_VALUE" type="xs:string" />
+                  <xs:element minOccurs="0" name="DATE_VALUE" type="xs:dateTime" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="CODE_VALUE" type="xs:string" />
+                  <xs:element minOccurs="0" name="DUR_VALUE" type="xs:int" />
+                  <xs:element minOccurs="0" name="NUM_VALUE" type="xs:decimal" />
+                  <xs:element minOccurs="0" name="DUR_FMT" type="xs:unsignedByte" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="INDICATOR_VALUE" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="AssignmentCustomFields">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="CUSTOM_FIELD_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="ASSN_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="MD_PROP_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="MD_PROP_ID" type="xs:int" />
+                  <xs:element minOccurs="0" name="FIELD_TYPE_ENUM" type="xs:unsignedByte" />
+                  <xs:element minOccurs="0" name="FLAG_VALUE" type="xs:boolean" />
+                  <xs:element minOccurs="0" name="TEXT_VALUE" type="xs:string" />
+                  <xs:element minOccurs="0" name="DATE_VALUE" type="xs:dateTime" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="CODE_VALUE" type="xs:string" />
+                  <xs:element minOccurs="0" name="DUR_VALUE" type="xs:int" />
+                  <xs:element minOccurs="0" name="NUM_VALUE" type="xs:decimal" />
+                  <xs:element minOccurs="0" name="DUR_FMT" type="xs:unsignedByte" />
+                  <xs:element msdata:ReadOnly="true" minOccurs="0" name="INDICATOR_VALUE" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique msdata:PrimaryKey="true" name="ProjectKey">
+          <xs:selector xpath=".//mstns:Project" />
+          <xs:field xpath="mstns:PROJ_UID" />
+        </xs:unique>
+        <xs:unique msdata:PrimaryKey="true" name="TaskKey">
+          <xs:selector xpath=".//mstns:Task" />
+          <xs:field xpath="mstns:TASK_UID" />
+          <xs:field xpath="mstns:PROJ_UID" />
+        </xs:unique>
+        <xs:unique msdata:PrimaryKey="true" name="ResourceKey">
+          <xs:selector xpath=".//mstns:ProjectResource" />
+          <xs:field xpath="mstns:RES_UID" />
+          <xs:field xpath="mstns:PROJ_UID" />
+        </xs:unique>
+        <xs:unique msdata:PrimaryKey="true" name="AssignmentKey">
+          <xs:selector xpath=".//mstns:Assignment" />
+          <xs:field xpath="mstns:ASSN_UID" />
+          <xs:field xpath="mstns:PROJ_UID" />
+        </xs:unique>
+        <xs:unique msdata:PrimaryKey="true" name="DependencyKey">
+          <xs:selector xpath=".//mstns:Dependency" />
+          <xs:field xpath="mstns:LINK_UID" />
+          <xs:field xpath="mstns:PROJ_UID" />
+        </xs:unique>
+        <xs:unique msdata:PrimaryKey="true" name="ProjectCustomFieldsKey">
+          <xs:selector xpath=".//mstns:ProjectCustomFields" />
+          <xs:field xpath="mstns:CUSTOM_FIELD_UID" />
+        </xs:unique>
+        <xs:unique msdata:PrimaryKey="true" name="TaskCustomFieldsKey">
+          <xs:selector xpath=".//mstns:TaskCustomFields" />
+          <xs:field xpath="mstns:CUSTOM_FIELD_UID" />
+        </xs:unique>
+        <xs:unique msdata:PrimaryKey="true" name="ProjectResourceCustomFieldsKey">
+          <xs:selector xpath=".//mstns:ProjectResourceCustomFields" />
+          <xs:field xpath="mstns:CUSTOM_FIELD_UID" />
+        </xs:unique>
+        <xs:unique msdata:PrimaryKey="true" name="AssignmentCustomFieldsKey">
+          <xs:selector xpath=".//mstns:AssignmentCustomFields" />
+          <xs:field xpath="mstns:CUSTOM_FIELD_UID" />
+        </xs:unique>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:mstns="http://schemas.microsoft.com/office/project/server/webservices/SyncErrorsDataSet" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="http://schemas.microsoft.com/office/project/server/webservices/SyncErrorsDataSet" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/SyncErrorsDataSet" id="SyncErrorsDataSet" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="SyncErrorsDataSet">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="SyncErrors">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="SYNC_ERROR_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="SYNC_WSS_LIST_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="SYNC_WSS_LIST_ITEM_ID" type="xs:int" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="SYNC_PROJ_UID" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" minOccurs="0" name="SYNC_TASK_UID" type="xs:string" />
+                  <xs:element minOccurs="0" name="SYNC_ERROR_DATE" type="xs:dateTime" />
+                  <xs:element minOccurs="0" name="SYNC_ERROR_TYPE_ENUM" type="xs:int" />
+                  <xs:element minOccurs="0" name="SYNC_ERROR_SEVERITY_ENUM" type="xs:int" />
+                  <xs:element minOccurs="0" name="SYNC_ERROR_XML_DATA">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="2000" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:mstns="http://schemas.microsoft.com/office/project/server/webservices/ProjectRelationsDataSet/" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="http://schemas.microsoft.com/office/project/server/webservices/ProjectRelationsDataSet/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/office/project/server/webservices/ProjectRelationsDataSet/" id="ProjectRelationsDataSet" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="ProjectRelationsDataSet">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="ProjectRelations">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="ProjectUID" type="xs:string" />
+                  <xs:element default="" name="ProjectName" type="xs:string" />
+                  <xs:element msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="RelatedProjectUID" type="xs:string" />
+                  <xs:element default="" name="RelatedProjectName" type="xs:string" />
+                  <xs:element default="0" name="Relationship" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique msdata:PrimaryKey="true" name="ProjectRelationsPrimaryKey">
+          <xs:selector xpath=".//mstns:ProjectRelations" />
+          <xs:field xpath="mstns:ProjectUID" />
+          <xs:field xpath="mstns:RelatedProjectUID" />
+        </xs:unique>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckOutProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckOutProject" />
+  </wsdl:message>
+  <wsdl:message name="CheckOutProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckOutProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueCheckInProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueCheckInProject" />
+  </wsdl:message>
+  <wsdl:message name="QueueCheckInProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueCheckInProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueCreateProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueCreateProject" />
+  </wsdl:message>
+  <wsdl:message name="QueueCreateProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueCreateProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueCreateProjectAndCheckOutSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueCreateProjectAndCheckOut" />
+  </wsdl:message>
+  <wsdl:message name="QueueCreateProjectAndCheckOutSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueCreateProjectAndCheckOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueAddToProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueAddToProject" />
+  </wsdl:message>
+  <wsdl:message name="QueueAddToProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueAddToProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateProjectFromTemplateSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateProjectFromTemplate" />
+  </wsdl:message>
+  <wsdl:message name="CreateProjectFromTemplateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateProjectFromTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueDeleteProjectsSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueDeleteProjects" />
+  </wsdl:message>
+  <wsdl:message name="QueueDeleteProjectsSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueDeleteProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueRenameProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueRenameProject" />
+  </wsdl:message>
+  <wsdl:message name="QueueRenameProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueRenameProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProject" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectEntitiesSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProjectEntities" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectEntitiesSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectEntitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueUpdateProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueUpdateProject" />
+  </wsdl:message>
+  <wsdl:message name="QueueUpdateProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueUpdateProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueDeleteFromProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueDeleteFromProject" />
+  </wsdl:message>
+  <wsdl:message name="QueueDeleteFromProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueDeleteFromProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectTeamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProjectTeam" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectTeamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueUpdateProjectTeamSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueUpdateProjectTeam" />
+  </wsdl:message>
+  <wsdl:message name="QueueUpdateProjectTeamSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueUpdateProjectTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSchedulingContextSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadSchedulingContext" />
+  </wsdl:message>
+  <wsdl:message name="ReadSchedulingContextSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadSchedulingContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectNameFromProjectUidSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProjectNameFromProjectUid" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectNameFromProjectUidSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectNameFromProjectUidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadServerListSeparatorSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadServerListSeparator" />
+  </wsdl:message>
+  <wsdl:message name="ReadServerListSeparatorSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadServerListSeparatorResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProjectStatus" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueuePublishSoapIn">
+    <wsdl:part name="parameters" element="tns:QueuePublish" />
+  </wsdl:message>
+  <wsdl:message name="QueuePublishSoapOut">
+    <wsdl:part name="parameters" element="tns:QueuePublishResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueuePublishSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:QueuePublishSummary" />
+  </wsdl:message>
+  <wsdl:message name="QueuePublishSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:QueuePublishSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueUpgradeProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueUpgradeProject" />
+  </wsdl:message>
+  <wsdl:message name="QueueUpgradeProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueUpgradeProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueCreateProposalProjectAndCheckoutSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueCreateProposalProjectAndCheckout" />
+  </wsdl:message>
+  <wsdl:message name="QueueCreateProposalProjectAndCheckoutSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueCreateProposalProjectAndCheckoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateOperationsWorkFromWssListSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateOperationsWorkFromWssList" />
+  </wsdl:message>
+  <wsdl:message name="CreateOperationsWorkFromWssListSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateOperationsWorkFromWssListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProjectWorkspaceAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateProjectWorkspaceAddress" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProjectWorkspaceAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateProjectWorkspaceAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectListSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProjectList" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectListSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectListByDepartmentSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProjectListByDepartment" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectListByDepartmentSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectListByDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueSynchronizeProjectWorkspaceSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueSynchronizeProjectWorkspace" />
+  </wsdl:message>
+  <wsdl:message name="QueueSynchronizeProjectWorkspaceSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueSynchronizeProjectWorkspaceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectImpactsSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProjectImpacts" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectImpactsSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectImpactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueueUpdateProjectImpactsSoapIn">
+    <wsdl:part name="parameters" element="tns:QueueUpdateProjectImpacts" />
+  </wsdl:message>
+  <wsdl:message name="QueueUpdateProjectImpactsSoapOut">
+    <wsdl:part name="parameters" element="tns:QueueUpdateProjectImpactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateWssListSyncedProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateWssListSyncedProject" />
+  </wsdl:message>
+  <wsdl:message name="CreateWssListSyncedProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateWssListSyncedProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncProjectWithWssSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncProjectWithWss" />
+  </wsdl:message>
+  <wsdl:message name="SyncProjectWithWssSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncProjectWithWssResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectSyncSettingsSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProjectSyncSettings" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectSyncSettingsSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectSyncSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProjectSyncSettingsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateProjectSyncSettings" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProjectSyncSettingsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateProjectSyncSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectSyncErrorInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadProjectSyncErrorInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadProjectSyncErrorInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadProjectSyncErrorInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ProjectSoap">
+    <wsdl:operation name="CheckOutProject">
+      <wsdl:input message="tns:CheckOutProjectSoapIn" />
+      <wsdl:output message="tns:CheckOutProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueCheckInProject">
+      <wsdl:input message="tns:QueueCheckInProjectSoapIn" />
+      <wsdl:output message="tns:QueueCheckInProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProject">
+      <wsdl:input message="tns:QueueCreateProjectSoapIn" />
+      <wsdl:output message="tns:QueueCreateProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProjectAndCheckOut">
+      <wsdl:input message="tns:QueueCreateProjectAndCheckOutSoapIn" />
+      <wsdl:output message="tns:QueueCreateProjectAndCheckOutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueAddToProject">
+      <wsdl:input message="tns:QueueAddToProjectSoapIn" />
+      <wsdl:output message="tns:QueueAddToProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateProjectFromTemplate">
+      <wsdl:input message="tns:CreateProjectFromTemplateSoapIn" />
+      <wsdl:output message="tns:CreateProjectFromTemplateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueDeleteProjects">
+      <wsdl:input message="tns:QueueDeleteProjectsSoapIn" />
+      <wsdl:output message="tns:QueueDeleteProjectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueRenameProject">
+      <wsdl:input message="tns:QueueRenameProjectSoapIn" />
+      <wsdl:output message="tns:QueueRenameProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProject">
+      <wsdl:input message="tns:ReadProjectSoapIn" />
+      <wsdl:output message="tns:ReadProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectEntities">
+      <wsdl:input message="tns:ReadProjectEntitiesSoapIn" />
+      <wsdl:output message="tns:ReadProjectEntitiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProject">
+      <wsdl:input message="tns:QueueUpdateProjectSoapIn" />
+      <wsdl:output message="tns:QueueUpdateProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueDeleteFromProject">
+      <wsdl:input message="tns:QueueDeleteFromProjectSoapIn" />
+      <wsdl:output message="tns:QueueDeleteFromProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectTeam">
+      <wsdl:input message="tns:ReadProjectTeamSoapIn" />
+      <wsdl:output message="tns:ReadProjectTeamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProjectTeam">
+      <wsdl:input message="tns:QueueUpdateProjectTeamSoapIn" />
+      <wsdl:output message="tns:QueueUpdateProjectTeamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadSchedulingContext">
+      <wsdl:input message="tns:ReadSchedulingContextSoapIn" />
+      <wsdl:output message="tns:ReadSchedulingContextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectNameFromProjectUid">
+      <wsdl:input message="tns:GetProjectNameFromProjectUidSoapIn" />
+      <wsdl:output message="tns:GetProjectNameFromProjectUidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadServerListSeparator">
+      <wsdl:input message="tns:ReadServerListSeparatorSoapIn" />
+      <wsdl:output message="tns:ReadServerListSeparatorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectStatus">
+      <wsdl:input message="tns:ReadProjectStatusSoapIn" />
+      <wsdl:output message="tns:ReadProjectStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueuePublish">
+      <wsdl:input message="tns:QueuePublishSoapIn" />
+      <wsdl:output message="tns:QueuePublishSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueuePublishSummary">
+      <wsdl:input message="tns:QueuePublishSummarySoapIn" />
+      <wsdl:output message="tns:QueuePublishSummarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpgradeProject">
+      <wsdl:input message="tns:QueueUpgradeProjectSoapIn" />
+      <wsdl:output message="tns:QueueUpgradeProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProposalProjectAndCheckout">
+      <wsdl:input message="tns:QueueCreateProposalProjectAndCheckoutSoapIn" />
+      <wsdl:output message="tns:QueueCreateProposalProjectAndCheckoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOperationsWorkFromWssList">
+      <wsdl:input message="tns:CreateOperationsWorkFromWssListSoapIn" />
+      <wsdl:output message="tns:CreateOperationsWorkFromWssListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjectWorkspaceAddress">
+      <wsdl:input message="tns:UpdateProjectWorkspaceAddressSoapIn" />
+      <wsdl:output message="tns:UpdateProjectWorkspaceAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectList">
+      <wsdl:input message="tns:ReadProjectListSoapIn" />
+      <wsdl:output message="tns:ReadProjectListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectListByDepartment">
+      <wsdl:input message="tns:ReadProjectListByDepartmentSoapIn" />
+      <wsdl:output message="tns:ReadProjectListByDepartmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueSynchronizeProjectWorkspace">
+      <wsdl:input message="tns:QueueSynchronizeProjectWorkspaceSoapIn" />
+      <wsdl:output message="tns:QueueSynchronizeProjectWorkspaceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectImpacts">
+      <wsdl:input message="tns:ReadProjectImpactsSoapIn" />
+      <wsdl:output message="tns:ReadProjectImpactsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProjectImpacts">
+      <wsdl:input message="tns:QueueUpdateProjectImpactsSoapIn" />
+      <wsdl:output message="tns:QueueUpdateProjectImpactsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateWssListSyncedProject">
+      <wsdl:input message="tns:CreateWssListSyncedProjectSoapIn" />
+      <wsdl:output message="tns:CreateWssListSyncedProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncProjectWithWss">
+      <wsdl:input message="tns:SyncProjectWithWssSoapIn" />
+      <wsdl:output message="tns:SyncProjectWithWssSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectSyncSettings">
+      <wsdl:input message="tns:ReadProjectSyncSettingsSoapIn" />
+      <wsdl:output message="tns:ReadProjectSyncSettingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjectSyncSettings">
+      <wsdl:input message="tns:UpdateProjectSyncSettingsSoapIn" />
+      <wsdl:output message="tns:UpdateProjectSyncSettingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectSyncErrorInfo">
+      <wsdl:input message="tns:ReadProjectSyncErrorInfoSoapIn" />
+      <wsdl:output message="tns:ReadProjectSyncErrorInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProjectSoap" type="tns:ProjectSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckOutProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/CheckOutProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueCheckInProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueCheckInProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueCreateProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProjectAndCheckOut">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueCreateProjectAndCheckOut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueAddToProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueAddToProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProjectFromTemplate">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/CreateProjectFromTemplate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueDeleteProjects">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueDeleteProjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueRenameProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueRenameProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectEntities">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectEntities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueUpdateProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueDeleteFromProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueDeleteFromProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectTeam">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectTeam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProjectTeam">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueUpdateProjectTeam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadSchedulingContext">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadSchedulingContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectNameFromProjectUid">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/GetProjectNameFromProjectUid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadServerListSeparator">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadServerListSeparator" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectStatus">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueuePublish">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueuePublish" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueuePublishSummary">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueuePublishSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpgradeProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueUpgradeProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProposalProjectAndCheckout">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueCreateProposalProjectAndCheckout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOperationsWorkFromWssList">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/CreateOperationsWorkFromWssList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjectWorkspaceAddress">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/UpdateProjectWorkspaceAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectList">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectListByDepartment">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectListByDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueSynchronizeProjectWorkspace">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueSynchronizeProjectWorkspace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectImpacts">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectImpacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProjectImpacts">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueUpdateProjectImpacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWssListSyncedProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/CreateWssListSyncedProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncProjectWithWss">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/SyncProjectWithWss" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectSyncSettings">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectSyncSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjectSyncSettings">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/UpdateProjectSyncSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectSyncErrorInfo">
+      <soap:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectSyncErrorInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ProjectSoap12" type="tns:ProjectSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckOutProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/CheckOutProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueCheckInProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueCheckInProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueCreateProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProjectAndCheckOut">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueCreateProjectAndCheckOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueAddToProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueAddToProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProjectFromTemplate">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/CreateProjectFromTemplate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueDeleteProjects">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueDeleteProjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueRenameProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueRenameProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectEntities">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectEntities" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueUpdateProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueDeleteFromProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueDeleteFromProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectTeam">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectTeam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProjectTeam">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueUpdateProjectTeam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadSchedulingContext">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadSchedulingContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectNameFromProjectUid">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/GetProjectNameFromProjectUid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadServerListSeparator">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadServerListSeparator" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectStatus">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueuePublish">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueuePublish" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueuePublishSummary">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueuePublishSummary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpgradeProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueUpgradeProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueCreateProposalProjectAndCheckout">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueCreateProposalProjectAndCheckout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOperationsWorkFromWssList">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/CreateOperationsWorkFromWssList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjectWorkspaceAddress">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/UpdateProjectWorkspaceAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectList">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectListByDepartment">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectListByDepartment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueSynchronizeProjectWorkspace">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueSynchronizeProjectWorkspace" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectImpacts">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectImpacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueueUpdateProjectImpacts">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/QueueUpdateProjectImpacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWssListSyncedProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/CreateWssListSyncedProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncProjectWithWss">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/SyncProjectWithWss" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectSyncSettings">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectSyncSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjectSyncSettings">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/UpdateProjectSyncSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadProjectSyncErrorInfo">
+      <soap12:operation soapAction="http://schemas.microsoft.com/office/project/server/webservices/Project/ReadProjectSyncErrorInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Project">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Contains the Project web service for Microsoft Project Server.</wsdl:documentation>
+    <wsdl:port name="ProjectSoap" binding="tns:ProjectSoap">
+      <soap:address location="http://mypmoweb/PMO/_vti_bin/PSI/Project.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ProjectSoap12" binding="tns:ProjectSoap12">
+      <soap12:address location="http://mypmoweb/PMO/_vti_bin/PSI/Project.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
